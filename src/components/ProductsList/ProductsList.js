@@ -1,4 +1,5 @@
 import React from "react";
+
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 
 class ProductsList extends React.Component {

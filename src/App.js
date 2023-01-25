@@ -7,17 +7,21 @@ import styles from "./App.module.scss";
 import { useEffect, useState } from "react";
 
 function App() {
+  const [productsToBuy, setProductsToBuy] = useState([]);
   const [fullProductsList, setfullProductsList] = useState(produkty);
   const [filteredProductsList, setFilteredProductsList] =
     useState(fullProductsList);
 
   return (
     <div className={styles.appWrapper}>
-      <AddProducts />
+      <AddProducts sendNewProductToParent={setfullProductsList} />
       <ProductsFilters />
       <div className={styles.columnsWrapper}>
-        <ProductsList newProductsList={filteredProductsList} />
-        <ShopingList />
+        <ProductsList
+          newProductsList={filteredProductsList}
+          sendAddedProductsToParent={setProductsToBuy}
+        />
+        <ShopingList productsToBuy={productsToBuy} />
       </div>
     </div>
   );
