@@ -12,10 +12,25 @@ function App() {
   const [filteredProductsList, setFilteredProductsList] =
     useState(fullProductsList);
 
+  //UPDATE PRODUCTLIST WHENEVER WE ADD NEW ONE
+  useEffect(() => {
+    setFilteredProductsList(fullProductsList);
+  }, [fullProductsList]);
+
   return (
-    <div className={styles.appWrapper}>
-      <AddProducts sendNewProductToParent={setfullProductsList} />
-      <ProductsFilters />
+    <>
+      <div className={styles.appWrapper}>
+        {console.log(filteredProductsList)}
+        <div className={styles.LeftPanel}>
+          <AddProducts sendNewProductToParent={setfullProductsList} />
+        </div>
+        <div className={styles.RightPanel}>
+          <ProductsFilters
+            productsToFilter={fullProductsList}
+            sendFilteredNazwaToParentComponent={setFilteredProductsList}
+          />
+        </div>
+      </div>
       <div className={styles.columnsWrapper}>
         <ProductsList
           newProductsList={filteredProductsList}
@@ -23,7 +38,7 @@ function App() {
         />
         <ShopingList productsToBuy={productsToBuy} />
       </div>
-    </div>
+    </>
   );
 }
 
