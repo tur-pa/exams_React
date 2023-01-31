@@ -39,9 +39,13 @@ class ProductsFilters extends React.Component {
     }
     // FILTER BY CATEGORY //
     if (this.state.searchCategory) {
-      filteredProducts = this.state.productsToFilter.filter(
-        (currProduct) => currProduct.kategoria === this.state.searchCategory
-      );
+      if (this.state.searchCategory === "all") {
+        filteredProducts = this.state.productsToFilter;
+      } else {
+        filteredProducts = this.state.productsToFilter.filter(
+          (currProduct) => currProduct.kategoria === this.state.searchCategory
+        );
+      }
     }
 
     this.props.sendFilteredNazwaToParentComponent(filteredProducts);
@@ -95,6 +99,7 @@ class ProductsFilters extends React.Component {
           <br />
           <p>Filter by category</p>
           <select onChange={this.handleSelectCategory}>
+            <option value="all">all</option>
             {uniqueCategoryList.map((currCategory) => (
               <option key={currCategory} value={currCategory}>
                 {currCategory}
