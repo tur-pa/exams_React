@@ -27,22 +27,22 @@ class ProductsFilters extends React.Component {
   //////// FILTER ////////
 
   filterProducts = () => {
+    let filteredProducts;
     // FILTER BY PHRASE //
-    let filteredProducts = this.state.productsToFilter.filter((currProduct) =>
+    filteredProducts = this.state.productsToFilter.filter((currProduct) =>
       currProduct.nazwa.includes(this.state.searchPhrase.toLowerCase())
     );
     // FILTER BY GROCERIES //
     if (this.state.searchOnlyGroceries) {
-      filteredProducts = this.state.productsToFilter.filter(
+      filteredProducts = filteredProducts.filter(
         (currProduct) => currProduct.produktSpozywczy
       );
     }
     // FILTER BY CATEGORY //
     if (this.state.searchCategory) {
-      if (this.state.searchCategory === "all") {
-        filteredProducts = this.state.productsToFilter;
-      } else {
-        filteredProducts = this.state.productsToFilter.filter(
+      console.log(this.state.searchCategory);
+      if (this.state.searchCategory !== "all") {
+        filteredProducts = filteredProducts.filter(
           (currProduct) => currProduct.kategoria === this.state.searchCategory
         );
       }
