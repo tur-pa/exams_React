@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 import {
   setShoppingLoadingState,
@@ -70,24 +70,15 @@ function ProductsList() {
     }
   };
 
-  const ref = useRef(null);
-  useEffect(() => {
-    if (productsList.length > 0) {
-      console.log(productsList.length);
-      console.log("powinno działać");
-      ref.current.focus();
-    } else {
-      console.log("niepowinno działać");
-    }
-  }, [productsList]);
-
   const handleKeyDown = (event, product) => {
-    event.preventDefault();
     if (event.key === "ArrowDown") {
+      event.preventDefault();
       setSelectedIndex(selectedIndex + 1);
     } else if (event.key === "ArrowUp") {
+      event.preventDefault();
       setSelectedIndex(selectedIndex - 1);
     } else if (event.key === "d") {
+      event.preventDefault();
       productDetails(event, product);
     }
   };
@@ -112,7 +103,6 @@ function ProductsList() {
                   : null
               }
               tabIndex={currIndex === 0 ? 0 : null}
-              ref={currIndex === 0 ? ref : null}
               onKeyDown={(event) =>
                 handleKeyDown(event, productsList[selectedIndex])
               }
